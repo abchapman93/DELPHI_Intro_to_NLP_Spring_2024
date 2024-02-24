@@ -1,0 +1,4 @@
+./data/pneumonia_data/*v2/:
+.idea/*
+*.DS_Store
+*checkpoint.ipynb
