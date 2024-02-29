@@ -570,9 +570,9 @@ test_ckd_stage_x = ValueTest(validation_func=test_ckd_stage_x_validation_func)
 
 hint_discharge_summ_target_rules = QuizHint(hints=[
     widgets.HTML("""Here is an example of some rules:</br>
-    <img src="./media/hint_disch_summ_target_rules.png" width="60%"></img>"""),
+    <img src="https://raw.githubusercontent.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024/main/media/hint_disch_summ_target_rules.png" width="60%"></img>"""),
     widgets.HTML("""Here is processed text using these rules:</br>
-    <img src="./media/hint_disch_summ_extracted.png" width="70%"></img>""")
+    <img src="https://github.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024/blob/main/media/hint_disch_summ_extracted.png?raw=true" width="70%"></img>""")
 ])
 
 from IPython.display import HTML
