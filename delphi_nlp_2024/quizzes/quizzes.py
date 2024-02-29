@@ -79,6 +79,12 @@ test_day_of_week = MultipleChoiceQuiz(description="What day of the week is it?",
 test_state = FreeTextTest(description="What state are we in? (No abbreviations!)",
              answer="Utah")
 
+hint_example = QuizHint("Click the 'Get hint' button to see the next hint and 'Hide hints' to remove them.",
+        hints=[
+            widgets.HTML("This will be the first hint."),
+            widgets.HTML("""Sometimes there's a second.</br> <img src="https://github.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024/blob/main/media/they_dont_know.jpeg?raw=true"></img>"""),
+        ])
+
 prime_mc = SelectMultipleQuiz("Which of the following numbers are prime? (Select all that apply.)",
                    answer=[2, 3, 5],
                   options=[2, 3, 4, 5, 6],

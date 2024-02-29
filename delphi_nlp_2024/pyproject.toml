@@ -1,0 +1,20 @@
+[project]
+name = "delphi_nlp_2024"
+version = "0.0.1"
+authors = [
+  { name="Alec Chapman", email="abchapman93@gmail.com" },
+]
+description = "Package containing quizzes and helpers for UoU DELPHI NLP Workshop, Feb 2024."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "jupyter"
+]
+
+[project.urls]
+Homepage = "https://github.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024"
