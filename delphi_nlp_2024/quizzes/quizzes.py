@@ -7,6 +7,7 @@ from .quiz_hint import QuizHint
 from datetime import datetime
 import ipywidgets as widgets
 import os, glob
+import re
 
 
 disch_summ = """
@@ -689,3 +690,77 @@ def test_baseline_nlp_scores_validation(scores):
 
 
 quiz_pre_recall_f1 = ValueTest(None, validation_func=test_baseline_nlp_scores_validation)
+
+
+def validate_ba_pattern(pattern):
+    pattern = re.compile(pattern)
+    texts = ["b", "ba", "baaaaaaaaaa"]
+    expected = [["b"], ["ba"], ["ba"]]
+    correct = False
+    for text, e in zip(texts, expected):
+        print("Text:", text)
+        actual = pattern.findall(text)
+        if actual != e:
+            print(f"Incorrect. For '{text}', expected '{e}', got {actual} for {text}")
+            correct = False
+        else:
+            print("Correct!")
+            print()
+    return
+
+test_ba_pattern = ValueTest(validation_func=validate_ba_pattern)
+
+
+def validate_baaaa_pattern(pattern):
+    pattern = re.compile(pattern)
+    texts = ["b", "ba", "baaaaaaaaaa"]
+    expected = [[], ["ba"], ["baaaaaaaaaa"]]
+    correct = False
+    for text, e in zip(texts, expected):
+        print("Text:", text)
+        actual = pattern.findall(text)
+        if actual != e:
+            print(f"Incorrect. For '{text}', expected '{e}', got {actual} for {text}")
+            correct = False
+        else:
+            print("Correct!")
+            print()
+    return
+
+quiz_anatomy_matches = ValueTest(expected=['heart', 'head', 'nose', 'mouth', 'hair'])
+
+test_baaaa_pattern = ValueTest(validation_func=validate_baaaa_pattern)
+
+def validate_ba_pattern_all(pattern):
+    pattern = re.compile(pattern)
+    texts = ["b", "ba", "baaaaaaaaaa"]
+    expected = [["b"], ["ba"], ["baaaaaaaaaa"]]
+    correct = False
+    for text, e in zip(texts, expected):
+        print("Text:", text)
+        actual = pattern.findall(text)
+        if actual != e:
+            print(f"Incorrect. For '{text}', expected '{e}', got {actual} for {text}")
+            correct = False
+        else:
+            print("Correct!")
+            print()
+    return
+
+
+test_ba_pattern_all = ValueTest(validation_func=validate_ba_pattern_all)
+
+def validate_infiltrate_pattern(pattern):
+    actual = []
+    infiltrate_text = 'The infiltrate then infiltrated the thing resulting in infiltration'
+    expected = ['infiltrate', 'infiltrated', 'infiltration']
+    actual = [match.group() for match in re.finditer(pattern, infiltrate_text)]
+
+    if actual != expected:
+        print(f"Incorrect. Expected {actual}, got {expected}")
+    else:
+        print("That is correct!")
+
+test_infiltrate_pattern = ValueTest(validation_func=validate_infiltrate_pattern)
+
+
