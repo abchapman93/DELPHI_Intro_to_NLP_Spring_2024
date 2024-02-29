@@ -53,11 +53,16 @@ def build_nlp_context(rules=True):
 
 import pickle
 def load_pneumonia_data(split_set="train", directory=None):
+    if split_set not in ("train", "test"):
+        raise ValueError(f"split_set must be one of ('train', 'test'), not {split_set}")
     if directory is None:
-        raise NotImplementedError()
-    fp = os.path.join(directory, split_set+".pkl")
-    with open(fp, "rb") as f:
-        return pickle.load(f)
+        url = "https://github.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024/raw/main/data/pneumonia_data/{}.pkl"
+        df = pd.read_pickle(url.format(split_set))
+    else:
+        fp = os.path.join(directory, split_set+".pkl")
+        with open(fp, "rb") as f:
+            df = pickle.load(f)
+    return df
 
 LABEL_MAPPING = {'PNEUMONIA_DOC_YES': 1, 'PNEUMONIA_DOC_NO': 0}
 

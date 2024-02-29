@@ -620,7 +620,7 @@ quiz_context_attributes5 = SelectMultipleQuiz(
 
 hint_custom_context = QuizHint(hints=[
     widgets.HTML("""Here is output of the processed texts with added target rules and context rules:</br></br>
-    <img src="./media/hint_custom_context.png" width="75%"></img>""")
+    <img src="https://github.com/abchapman93/DELPHI_Intro_to_NLP_Spring_2024/blob/main/media/hint_custom_context.png?raw=true" width="75%"></img>""")
 ])
 
 
@@ -763,4 +763,33 @@ def validate_infiltrate_pattern(pattern):
 
 test_infiltrate_pattern = ValueTest(validation_func=validate_infiltrate_pattern)
 
+def test_classify_covid_validation_func(func):
+    nlp = build_nlp_context()
+    texts = [
+        "The patient has Covid-19.",
+        "Her husband recently came down with Covid. He is isolated and doing okay. She tested positive for SARS-COV-2 one week later.",
+        "If you test positive for SARS-COV-2, isolate according to CDC guidelines.",
+        "She recently had a positive PCR for Covid-19.",
+        "She had symptoms which were concerning for Covid-19 but her Covid test was negative."
+    ]
+    labels = ["POS", "POS", "NEG", "POS", "NEG"]
+    for (text, label) in zip(texts, labels):
+        doc = nlp(text)
+        pred = func(doc)
+        if pred != label:
+            print(f"Incorrect. Expected {label}, got {pred} for doc: '{text}'")
+            return
+    print("That is correct!")
+test_classify_covid = ValueTest(validation_func=test_classify_covid_validation_func)
 
+quiz_precision_recall_all_pos = MultipleChoiceQuiz(description="I am a lazy NLP developer. I decide to simply predict that every single note is positive. What would the precision and recall be in this scenario?",
+                  answer="Precision = 0; Recall = 1",
+                  options=["Precision = 0; Recall = 0",
+                          "Precision = 0.5; Recall = 0.75",
+                          "Precision = 1; Recall = 0"])
+quiz_precision_recall_all_neg = MultipleChoiceQuiz(description="Feeling guilty about my job performance, I redesign my system so it calls everything negative. What would the precision and recall be in this scenario?",
+                  answer="Precision = 1; Recall = 0",
+                  options=["Precision = 0; Recall = 0",
+                           "Precision = 0; Recall = 1",
+                          "Precision = 0.5; Recall = 0.75",
+                          "Precision = 1; Recall = 0"])
